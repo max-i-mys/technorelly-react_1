@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AddUser from './components/AddUser'
 import UserList from './components/UserList'
