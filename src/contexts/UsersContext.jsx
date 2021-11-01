@@ -36,6 +36,6 @@ export default function UsersProvider({ children }) {
 				throw new Error(`Wrong action type: ${action.type}`)
 		}
 	}
-
+	console.log()
 	return <UsersContext.Provider value={[users, dispatchUsers]}>{children}</UsersContext.Provider>
 }
