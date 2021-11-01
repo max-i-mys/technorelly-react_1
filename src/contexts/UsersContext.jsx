@@ -15,28 +15,26 @@ export default function UsersProvider({ children }) {
 
 	function reducer(state, action) {
 		switch (action.type) {
-			case 'INITIAL':
-				return action.payload
-			case 'ADD': {
-				const newUsers = [...state, action.payload]
-				localStorage.setItem('users', JSON.stringify(newUsers))
-				return newUsers
-			}
-			case 'DELETE': {
-				const newUsers = [...state]
-				const currentIndex = newUsers.findIndex(person => person.id === action.payload)
+		case 'INITIAL':
+			return action.payload
+		case 'ADD': {
+			const newUsers = [...state, action.payload]
+			localStorage.setItem('users', JSON.stringify(newUsers))
+			return newUsers
+		}
+		case 'DELETE': {
+			const newUsers = [...state]
+			const currentIndex = newUsers.findIndex(person => person.id === action.payload)
+			newUsers.splice(currentIndex, 1)
+			if (currentIndex !== -1) {
 				newUsers.splice(currentIndex, 1)
-				if (currentIndex !== -1) {
-					newUsers.splice(currentIndex, 1)
-				}
-				localStorage.setItem('users', JSON.stringify(newUsers))
-				return newUsers
 			}
-			default:
-				throw new Error(`Wrong action type: ${action.type}`)
+			localStorage.setItem('users', JSON.stringify(newUsers))
+			return newUsers
+		}
+		default:
+			throw new Error(`Wrong action type: ${action.type}`)
 		}
 	}
-	console.log('')
-	console.log('')
 	return <UsersContext.Provider value={[users, dispatchUsers]}>{children}</UsersContext.Provider>
 }
